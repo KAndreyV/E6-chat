@@ -100,8 +100,8 @@ AUTHENTICATION_BACKENDS = [
     # `allauth` specific authentication methods, such as login by e-mail
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
-ASGI_APPLICATION = "messanger.asgi.application"
-# WSGI_APPLICATION = 'messanger.wsgi.application'
+
+WSGI_APPLICATION = 'messanger.wsgi.application'
 
 
 # Database
@@ -182,8 +182,13 @@ DEFAULT_FROM_EMAIL = os.environ['DEFAULT_FROM_EMAIL']
 
 APSCHEDULER_DATETIME_FORMAT = "N j, Y, f:s a"
 
-CHANNEL_LAYERS  = {
-    'default': {
-        'BACKEND': "channels.layers.InMemoryChannelLayer"
-        }
-    }
+ASGI_APPLICATION = "olympia.routing.application"
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [("localhost", 6379)],
+        },
+    },
+}
