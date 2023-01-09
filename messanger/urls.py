@@ -18,11 +18,7 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from rest_framework import routers
-from my_messanger_app.views import chat_box, ChatViewSet
 
-
-router = routers.DefaultRouter()
-router.register(r'chats', ChatViewSet)
 
 
 urlpatterns = [
@@ -30,7 +26,7 @@ urlpatterns = [
     path('sign/', include('sign.urls')),
     path('', include('protect.urls')),
     path('writers/', include('my_messanger_app.urls')),
-    path('rest/', include(router.urls)),
-    path("chat/<str:chat_box_name>/", chat_box, name="chat"),
-    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    # path('rest/', include(router.urls)),
+    # path("chat/<str:chat_box_name>/", chat_box, name="chat"),
+    # path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

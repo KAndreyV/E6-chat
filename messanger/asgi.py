@@ -1,21 +1,22 @@
-from channels.routing import ProtocolTypeRouter, URLRouter
 import os
-from django.core.asgi import get_asgi_application
-import my_messanger_app.routing #new
-from channels.security.websocket import AllowedHostsOriginValidator
+import django
 from channels.auth import AuthMiddlewareStack
+from channels.routing import ProtocolTypeRouter, URLRouter
+from django.core.asgi import get_asgi_application
 
+from my_messanger_app.middleware import JwtAuthMiddlewareStack
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'messanger.settings')
+django.setup()
 
-asgi_application = get_asgi_application() #new
-
-
+from my_messanger_app import routing
+# application = get_asgi_application()
 
 application = ProtocolTypeRouter({
-            "http": asgi_application,
-            "websocket": AllowedHostsOriginValidator(AuthMiddlewareStack(
-            URLRouter(my_messanger_app.routing.websocket_urlpatterns)
-                ),
-            )
+  "http": get_asgi_application(),
+  "websocket": JwtAuthMiddlewareStack(
+        URLRouter(
+            routing.websocket_urlpatterns
+        )
+    ),
 })

@@ -1,12 +1,5 @@
 from django import forms
-from .models import Chat, Writer
-
-
-# class ChatForm(forms.ModelForm):
-#     class Meta:
-#         model = Chat
-#         fields = ['name']
-#         exclude = ['writer']
+from .models import Writer
 
 
 class WriterForm(forms.ModelForm):

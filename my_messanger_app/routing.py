@@ -1,11 +1,9 @@
-from channels.auth import AuthMiddlewareStack
-from channels.routing import ProtocolTypeRouter, URLRouter
-from django.urls import re_path, path
-from my_messanger_app import consumers
+from django.urls import path, re_path
 
-# URLs that handle the WebSocket connection are placed here.
-websockets = URLRouter([
-                    path(
-                        "ws/chat/(?P<chat_box_name>[A-Za-z0-9_-]+)", consumers.ChatRoomConsumer.as_asgi()
-                    ),
-                ])
+from . import consumers
+
+
+websocket_urlpatterns = [
+    path("ws/", consumers.UserConsumer.as_asgi()),
+    path('ws/chat/', consumers.RoomConsumer.as_asgi()),
+]

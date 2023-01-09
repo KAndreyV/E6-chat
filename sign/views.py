@@ -23,6 +23,6 @@ class BaseRegisterView(CreateView):
 
             user.groups.add(user_group)
 
-            return redirect('/')
+            return redirect('http://127.0.0.1:8000/sign/login/')
         else:
              return render(request, self.template_name, {'form': form})

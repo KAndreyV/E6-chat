@@ -182,13 +182,13 @@ DEFAULT_FROM_EMAIL = os.environ['DEFAULT_FROM_EMAIL']
 
 APSCHEDULER_DATETIME_FORMAT = "N j, Y, f:s a"
 
-ASGI_APPLICATION = "olympia.routing.application"
+ASGI_APPLICATION = "messanger.asgi.application"
 
 CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
         "CONFIG": {
-            "hosts": [("localhost", 6379)],
+            "hosts": [("127.0.0.1", 6379)],
         },
     },
 }
