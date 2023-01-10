@@ -1,6 +1,5 @@
-<!-- chat/templates/chat/index.html -->
-<!DOCTYPE html>
-<html>
+{% extends 'flatpages/default.html' %}
+{% block content %}
 <head>
     <meta charset="utf-8"/>
     <title>Chat Rooms</title>
@@ -20,8 +19,8 @@
 
         document.querySelector('#room-name-submit').onclick = function(e) {
             var roomName = document.querySelector('#room-name-input').value;
-            window.location.pathname = '/chat/' + roomName + '/';
+            window.location.pathname = '/chat/chats/' + roomName + '/';
         };
     </script>
 </body>
-</html>
+{% endblock content %}

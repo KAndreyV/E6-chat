@@ -24,4 +24,5 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path('sign/', include('sign.urls')),
     path('', include('protect.urls')),
+    path('api-auth/', include('rest_framework.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,9 +1,10 @@
-# chat/views.py
 from django.shortcuts import render
 from django.views.generic import (ListView, DetailView, UpdateView, DeleteView, )
 from .models import Writer, Room, Message
 from .forms import *
 from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMixin
+from .serializers import *
+from rest_framework import viewsets, generics
 
 
 def index(request):
@@ -33,3 +34,16 @@ class WriterUpgrade(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     model = Writer
     template_name = 'writer_edit.html'
     context_object_name = 'writer'
+
+
+class RoomList(generics.ListCreateAPIView, LoginRequiredMixin):
+    queryset = Room.objects.all()
+    serializer_class = RoomSerializer
+
+    def perform_create(self, serializer):
+        serializer.save(host=self.request.user)
+
+
+class RoomDetail(generics.RetrieveUpdateDestroyAPIView, LoginRequiredMixin):
+    queryset = Room.objects.all()
+    serializer_class = RoomSerializer
