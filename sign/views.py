@@ -1,6 +1,6 @@
 from django.views.generic.edit import CreateView
 from .models import BaseRegisterForm
-from my_messanger_app.models import Writer
+from chat.models import Writer
 from django.contrib.auth.models import Group
 from django.shortcuts import render, redirect
 
